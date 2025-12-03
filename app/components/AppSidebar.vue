@@ -1,38 +1,82 @@
 <script setup lang="ts">
-const isOpen = ref(true)
+const isOpen = ref(false)
+let openTimeout: number | null = null
+let closeTimeout: number | null = null
+let logoTimeout: number | null = null
+const showExpandedLogo = ref(isOpen.value)
 
 const emit = defineEmits<{
   (e: 'toggle', value: boolean): void
 }>()
 
+const handleMouseEnter = () => {
+  if (closeTimeout !== null) {
+    clearTimeout(closeTimeout)
+    closeTimeout = null
+  }
+
+  if (openTimeout !== null) {
+    clearTimeout(openTimeout)
+  }
+
+  // Delay opening so quick, accidental passes over the sidebar
+  // don't immediately expand it.
+  openTimeout = window.setTimeout(() => {
+    isOpen.value = true
+  }, 300)
+}
+
+const handleMouseLeave = () => {
+  if (openTimeout !== null) {
+    clearTimeout(openTimeout)
+    openTimeout = null
+  }
+
+  if (closeTimeout !== null) {
+    clearTimeout(closeTimeout)
+  }
+  closeTimeout = window.setTimeout(() => {
+    isOpen.value = false
+  }, 150)
+}
+
 watch(isOpen, (val) => {
   emit('toggle', val)
+
+  if (logoTimeout !== null) {
+    clearTimeout(logoTimeout)
+    logoTimeout = null
+  }
+
+  // Use a short, symmetric delay for both opening and closing so the
+  // logo doesn't flicker during the width transition.
+  logoTimeout = window.setTimeout(() => {
+    showExpandedLogo.value = val
+  }, 120)
 })
 </script>
 
 <template>
-  <aside 
-    class="fixed left-0 top-0 h-screen bg-zinc-950 text-gray-400 border-r border-zinc-800 transition-all duration-300 z-50"
-    :class="isOpen ? 'w-64' : 'w-16'"
+  <!-- Hover Container with anticipatory buffer -->
+  <div
+    class="fixed left-0 top-0 h-screen z-50 flex"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
-    <!-- Toggle Button -->
-    <button 
-      class="absolute -right-3 top-14 bg-zinc-900 text-zinc-400 rounded-full p-1 hover:text-zinc-100 border border-zinc-700"
-      @click="isOpen = !isOpen"
+    <aside 
+      class="h-full bg-zinc-950 text-gray-400 border-r border-zinc-800 transition-all duration-300 overflow-hidden relative"
+      :class="isOpen ? 'w-64' : 'w-16'"
     >
-      <svg v-if="isOpen" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-    </button>
 
-    <!-- Content -->
-    <div class="px-3 py-4 h-full flex flex-col">
+      <!-- Content -->
+      <div class="px-3 py-4 h-full flex flex-col">
       <!-- Logo Area -->
       <div class="h-12 flex items-center mb-8 overflow-hidden">
         <img 
-          v-if="isOpen"
+          v-if="showExpandedLogo"
           src="/images/logos/logo-white-icon-text.svg" 
           alt="MattePaint" 
-          class="h-8 w-auto transition-opacity duration-300"
+          class="h-8 w-auto transition-opacity duration-300 mx-auto"
         />
         <img 
           v-else
@@ -139,6 +183,14 @@ watch(isOpen, (val) => {
           <p class="text-xs text-gray-400">user@example.com</p>
         </div>
       </div>
-    </div>
-  </aside>
+      </div>
+    </aside>
+
+    <!-- Invisible anticipatory hover buffer -->
+    <div
+      v-if="!isOpen"
+      class="w-8 h-full bg-transparent"
+    ></div>
+  </div>
+
 </template>

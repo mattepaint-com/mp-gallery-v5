@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const isSidebarOpen = ref(true)
+const isSidebarOpen = ref(false)
 const isCommandPaletteOpen = ref(false)
 
 // Global keyboard shortcut for Command Palette (Cmd+K / Ctrl+K)

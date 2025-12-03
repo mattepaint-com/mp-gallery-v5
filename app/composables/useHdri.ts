@@ -40,7 +40,7 @@ export const useHdri = () => {
     loading.value = true
     
     // SIMULATE NETWORK REQUEST
-    await new Promise(resolve => setTimeout(resolve, 800))
+    await new Promise(resolve => setTimeout(resolve, 150))
 
     // MOCK DATA
     hdris.value = [
@@ -118,7 +118,7 @@ export const useHdri = () => {
   const fetchById = async (id: number) => {
     loading.value = true
     // Simulate network
-    await new Promise(resolve => setTimeout(resolve, 500))
+    await new Promise(resolve => setTimeout(resolve, 120))
     
     // In a real app, this would be an API call
     // For now, we'll just ensure the list is populated or check a local cache

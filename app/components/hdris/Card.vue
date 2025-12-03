@@ -39,9 +39,9 @@ const onLeave = () => {
       alt="HDRI Preview"
     />
 
-    <!-- Overlay Title -->
+    <!-- Overlay Title (always visible) -->
     <div class="absolute top-4 left-4 z-20">
-      <h3 class="text-white font-bold text-lg drop-shadow-md opacity-0 group-hover:opacity-100 transition-opacity">
+      <h3 class="text-sm font-mono font-bold text-lg drop-shadow-md">
         {{ hdri.title }}
       </h3>
     </div>
