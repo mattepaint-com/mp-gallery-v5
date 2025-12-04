@@ -3,7 +3,7 @@
     <PageHeader 
       title="3D SCANS"
       description="High fidelity 3D scans and gaussian splats."
-      background-image="/images/Levitating Rock Scene.png"
+      background-image="/images/scans-background.jpg"
     />
 
     <HdrisFilterBar />

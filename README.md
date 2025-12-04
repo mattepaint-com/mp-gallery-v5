@@ -62,3 +62,7 @@ pnpm preview
 ```
 
 Deployment follows standard Nuxt 3 / Nitro deployment workflows.
+
+## Assets
+
+Scan videos: https://console.cloud.google.com/storage/browser/assets.mattepaint.com/v5-gallery/scans;tab=objects?project=textures-1204&supportedpurview=project&prefix=&forceOnObjectsSortingFiltering=false
