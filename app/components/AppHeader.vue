@@ -1,14 +1,11 @@
 <script setup lang="ts">
 const searchQuery = ref('')
+const breadcrumbs = useBreadcrumbs()
 
 interface Breadcrumb {
   label: string
   to?: string
 }
-
-defineProps<{
-  breadcrumbs?: Breadcrumb[]
-}>()
 </script>
 
 <template>
@@ -42,7 +39,7 @@ defineProps<{
     </div>
 
     <!-- Breadcrumbs Sub-nav -->
-    <div v-if="breadcrumbs?.length" class="w-full border-t border-zinc-800 bg-zinc-950/50 px-8 py-2">
+    <div v-if="breadcrumbs.length" class="w-full border-t border-zinc-800 bg-zinc-950/50 px-8 py-2">
       <nav class="flex items-center gap-2 text-xs font-mono text-zinc-500">
         <template v-for="(crumb, index) in breadcrumbs" :key="index">
           <NuxtLink 

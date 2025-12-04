@@ -3,6 +3,7 @@
 
     const route = useRoute();
     const { fetchById } = useHdri();
+    const breadcrumbs = useBreadcrumbs();
 
     const hdri = ref<Hdri | undefined>(undefined);
     const loading = ref(true);
@@ -75,15 +76,20 @@
         hoverFrame.value = frame;
     };
 
-    const breadcrumbs = computed(() => {
-        if (!hdri.value) return [];
-        return [{ label: "HDRIs", to: "/hdris" }, { label: hdri.value.title }];
+    watchEffect(() => {
+        if (!hdri.value) {
+            breadcrumbs.value = [];
+            return;
+        }
+
+        breadcrumbs.value = [
+            { label: "HDRIs", to: "/hdris" },
+            { label: hdri.value.title },
+        ];
     });
 </script>
 
 <template>
-    <AppHeader :breadcrumbs="breadcrumbs" />
-
     <div
         v-if="loading"
         class="flex items-center justify-center h-screen bg-zinc-950"
@@ -214,7 +220,7 @@
         </div>
 
         <!-- Content Grid -->
-        <div class="max-w-7xl mx-auto px-8 py-12 mt-8">
+        <div class="max-w-7xl mx-auto px-8 py-2">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 <!-- Left Column: Tech Specs -->
                 <div class="lg:col-span-3 space-y-6">

@@ -15,7 +15,7 @@ onMounted(() => {
 
 <template>
   <!-- Command pallete -->
-  <div class="bg-gray-950 min-h-screen flex">
+  <div class="bg-zinc-900 min-h-screen flex">
     <NuxtRouteAnnouncer />
     <CommandPalette v-model="isCommandPaletteOpen" />
     <AppSidebar @toggle="isSidebarOpen = $event" />
@@ -23,7 +23,10 @@ onMounted(() => {
       class="flex-1 transition-all duration-300"
       :class="isSidebarOpen ? 'ml-64' : 'ml-16'"
     >
-      <NuxtPage />
+      <div class="min-h-screen bg-black text-white">
+        <AppHeader />
+        <NuxtPage />
+      </div>
     </main>
   </div>
 </template>
