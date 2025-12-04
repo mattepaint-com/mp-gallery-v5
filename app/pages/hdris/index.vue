@@ -1,7 +1,9 @@
 <script setup>
 const { hdris, fetchList, loading } = useHdri()
+const breadcrumbs = useBreadcrumbs()
 
 onMounted(() => {
+  breadcrumbs.value = []
   fetchList()
 })
 </script>

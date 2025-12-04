@@ -2,6 +2,7 @@
 const props = defineProps<{
   title: string
   videoUrl: string
+  previewVideoUrl?: string
 }>()
 
 const videoRef = ref<HTMLVideoElement | null>(null)
@@ -57,7 +58,7 @@ const onMouseLeave = () => {
     <!-- Video -->
     <video 
       ref="videoRef"
-      :src="videoUrl" 
+      :src="previewVideoUrl || videoUrl" 
       class="absolute inset-0 w-full h-full object-cover"
       muted
       loop
