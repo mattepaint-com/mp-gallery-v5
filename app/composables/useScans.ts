@@ -14,7 +14,7 @@ export const useScans = () => {
     {
       id: 2,
       title: 'Ancient Rock Formation',
-      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable.mov',
+      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable2.mov',
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ export const useScans = () => {
     {
       id: 4,
       title: 'Coastal Cliff Face',
-      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable.mov',
+      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable2.mov',
     },
     {
       id: 5,
@@ -34,7 +34,7 @@ export const useScans = () => {
     {
       id: 6,
       title: 'Forest Floor Debris',
-      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable.mov',
+      videoUrl: 'https://storage.googleapis.com/assets.mattepaint.com/v5-gallery/scans/19966012M_gsplat_turntable2.mov',
     },
   ])
 
