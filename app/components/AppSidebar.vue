@@ -2,7 +2,7 @@
 import { PhSquaresFour, PhCube, PhCloudSun, PhCamera, PhDownloadSimple, PhFolders, PhHeart, PhCaretDown } from '@phosphor-icons/vue'
 
 const isOpen = ref(false)
-const isHdrisOpen = ref(true)
+const isHdrisOpen = ref(false)
 let openTimeout: number | null = null
 let closeTimeout: number | null = null
 let logoTimeout: number | null = null
